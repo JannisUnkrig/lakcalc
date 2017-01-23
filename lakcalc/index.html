@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Lords and Knights-Kampfrechner</title>
+		<title>Lords and Knights-Krampfrechner</title>
 
 		<meta charset="ISO8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,12 +33,12 @@
 				</tr>
 
 				<tr>
-					<td>Speerträger:</td>
+					<td>SpeertrÃ¤ger:</td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.defSpeertraeger" /></td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.offSpeertraeger" /></td>
 				</tr>
 				<tr>
-					<td>Schwertkämpfer:</td>
+					<td>SchwertkÃ¤mpfer:</td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.defSchwertkaempfer"></td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.offSchwertkaempfer"></td>
 				</tr>
@@ -49,17 +49,17 @@
 				</tr>
 			
 				<tr>
-					<td>Bogenschütze:</td>
+					<td>BogenschÃ¼tze:</td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.defBogenschuetze" /></td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.offBogenschuetze" /></td>
 				</tr>
 				<tr>
-					<td>Armbrustschütze:</td>
+					<td>ArmbrustschÃ¼tze:</td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.defArmbrustschuetze" /></td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.offArmbrustschuetze" /></td>
 				</tr>
 				<tr>
-					<td>Nordischer Bogensschütze:</td>
+					<td>Nordischer BogensschÃ¼tze:</td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.defNordischerBogenschuetze" /></td>
 					<td><input class="form-control" type="number" ng-model="snapshot0.offNordischerBogenschuetze" /></td>
 				</tr>
@@ -91,7 +91,7 @@
 				</tr>
 			</table>
 
-			<input type="submit" ng-click="kaempfe()" value="Kämpfe" />			
+			<input type="submit" ng-click="kaempfe()" value="KÃ¤mpfe" />			
 
 			<div ng-repeat="x in snapshot">
 			
@@ -107,13 +107,13 @@
 				</table>
 				
 <!--
-				<p>Verteidigungsstärke gegen Infanterie: </p>
-				<p>Verteidigungsstärke gegen Artillerie: {{x.defGegenArtillerie}}</p>
-				<p>Verteidigungsstärke gegen Kavallerie: {{x.defGegenKavallerie}}</p>
+				<p>VerteidigungsstÃ¤rke gegen Infanterie: </p>
+				<p>VerteidigungsstÃ¤rke gegen Artillerie: {{x.defGegenArtillerie}}</p>
+				<p>VerteidigungsstÃ¤rke gegen Kavallerie: {{x.defGegenKavallerie}}</p>
 				&nbsp;
-				<p>Angriffsstärke gegen Infanterie: {{x.offGegenInfanterie}}</p>
-				<p>Angriffsstärke gegen Artillerie: {{x.offGegenArtillerie}}</p>
-				<p>Angriffsstärke gegen Kavallerie: {{x.offGegenKavallerie}}</p>
+				<p>AngriffsstÃ¤rke gegen Infanterie: {{x.offGegenInfanterie}}</p>
+				<p>AngriffsstÃ¤rke gegen Artillerie: {{x.offGegenArtillerie}}</p>
+				<p>AngriffsstÃ¤rke gegen Kavallerie: {{x.offGegenKavallerie}}</p>
 -->
 	
 				<table class="table table-striped">
@@ -124,12 +124,12 @@
 						<th>Angreifer</th>
 					</tr>
 	
-					<tr><td>Speerträger:</td>            <td>{{x.defSpeertraeger}}</td>           <td>{{x.offSpeertraeger}}</td>           </tr>
-					<tr><td>Schwertkämpfer:</td>         <td>{{x.defSchwertkaempfer}}</td>        <td>{{x.offSchwertkaempfer}}</td>        </tr>
+					<tr><td>SpeertrÃ¤ger:</td>            <td>{{x.defSpeertraeger}}</td>           <td>{{x.offSpeertraeger}}</td>           </tr>
+					<tr><td>SchwertkÃ¤mpfer:</td>         <td>{{x.defSchwertkaempfer}}</td>        <td>{{x.offSchwertkaempfer}}</td>        </tr>
 					<tr><td>Berserker:</td>              <td>{{x.defBerserker}}</td>              <td>{{x.offBerserker}}</td>              </tr>
-					<tr><td>Bogenschütze:</td>           <td>{{x.defBogenschuetze}}</td>          <td>{{x.offBogenschuetze}}</td>          </tr>
-					<tr><td>Armbrustschütze:</td>        <td>{{x.defArmbrustschuetze}}</td>       <td>{{x.offArmbrustschuetze}}</td>       </tr>
-					<tr><td>Nordischer Bogenschütze:</td><td>{{x.defNordischerBogenschuetze}}</td><td>{{x.offNordischerBogenschuetze}}</td></tr>
+					<tr><td>BogenschÃ¼tze:</td>           <td>{{x.defBogenschuetze}}</td>          <td>{{x.offBogenschuetze}}</td>          </tr>
+					<tr><td>ArmbrustschÃ¼tze:</td>        <td>{{x.defArmbrustschuetze}}</td>       <td>{{x.offArmbrustschuetze}}</td>       </tr>
+					<tr><td>Nordischer BogenschÃ¼tze:</td><td>{{x.defNordischerBogenschuetze}}</td><td>{{x.offNordischerBogenschuetze}}</td></tr>
 					<tr><td>Panzerreiter:</td>           <td>{{x.defPanzerreiter}}</td>           <td>{{x.offPanzerreiter}}</td>           </tr>
 					<tr><td>Lanzenreiter:</td>           <td>{{x.defLanzenreiter}}</td>           <td>{{x.offLanzenreiter}}</td>           </tr>
 					<tr><td>Axtreiter:</td>              <td>{{x.defAxtreiter}}</td>              <td>{{x.offAxtreiter}}</td>              </tr>
