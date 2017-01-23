@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lords and Knights-Rechner</title>
+
+		<meta charset="ISO8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+		<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  	    <script src="lakcalc.js"></script>
+
+		<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl" style="max-width:400px;" class="container">
+
+			<div class="page-header"><h4>Lords and Knights-Rechner</h4></div>
+			<div class="row"> 
+    			<div class="col-xs-6">Startzeit:</div>
+				<div class="col-xs-6"><div uib-timepicker ng-model="snapshot0.uhrzeit" show-meridian="false"></div></div>
+			</div>
+
+			<table class="table table-striped">
+				<tr>
+					<th></th>
+					<th>Verteidiger</th>
+					<th>Angreifer</th>
+				</tr>
+
+				<tr>
+					<td>Speerträger:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defSpeertraeger" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offSpeertraeger" /></td>
+				</tr>
+				<tr>
+					<td>Schwertkämpfer:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defSchwertkaempfer"></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offSchwertkaempfer"></td>
+				</tr>
+				<tr>
+					<td>Berserker:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defBerserker" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offBerserker" /></td>
+				</tr>
+			
+				<tr>
+					<td>Bogenschütze:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defBogenschuetze" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offBogenschuetze" /></td>
+				</tr>
+				<tr>
+					<td>Armbrustschütze:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defArmbrustschuetze" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offArmbrustschuetze" /></td>
+				</tr>
+				<tr>
+					<td>Nordischer Bogensschütze:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defNordischerBogenschuetze" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offNordischerBogenschuetze" /></td>
+				</tr>
+				
+				<tr>
+					<td>Panzerreiter:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defPanzerreiter" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offPanzerreiter" /></td>
+				</tr>
+				<tr>
+					<td>Lanzenreiter:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defLanzenreiter" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offLanzenreiter" /></td>
+				</tr>
+				<tr>
+					<td>Axtreiter:</td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.defAxtreiter" /></td>
+					<td><input class="form-control" type="number" ng-model="snapshot0.offAxtreiter" /></td>
+				</tr>
+				<tr>
+					<td>Wehranlagen:</td>
+					<td><select class="form-control" ng-model="defWehranlagen"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Bibliothek:</td>
+					<td><select class="form-control" ng-model="defBibliothek"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></td>
+					<td><select class="form-control" ng-model="offBibliothek"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></td>
+				</tr>
+			</table>
+
+			<input type="submit" ng-click="kaempfe()" value="Kämpfe" />			
+
+			<div ng-repeat="x in snapshot">
+			
+				<hr />
+
+				<h4>Kampf um {{x.uhrzeit.getHours()}}:{{x.uhrzeit.getMinutes()}} <span ng-if="x.nachtmodus">(Nachtmodus)</span></h4>
+
+				<table class="table table-striped">
+					<tr><th></th><th>Defensivwerte</th><th>Offensivwerte</th></tr>
+					<tr><td>Infanterie</td><td>{{x.defGegenInfanterie}}</td><td>{{x.offGegenInfanterie}}</td></tr>
+					<tr><td>Artillerie</td><td>{{x.defGegenArtillerie}}</td><td>{{x.offGegenArtillerie}}</td></tr>
+					<tr><td>Kavallerie</td><td>{{x.defGegenKavallerie}}</td><td>{{x.offGegenKavallerie}}</td></tr>
+				</table>
+				
+<!--
+				<p>Verteidigungsstärke gegen Infanterie: </p>
+				<p>Verteidigungsstärke gegen Artillerie: {{x.defGegenArtillerie}}</p>
+				<p>Verteidigungsstärke gegen Kavallerie: {{x.defGegenKavallerie}}</p>
+				&nbsp;
+				<p>Angriffsstärke gegen Infanterie: {{x.offGegenInfanterie}}</p>
+				<p>Angriffsstärke gegen Artillerie: {{x.offGegenArtillerie}}</p>
+				<p>Angriffsstärke gegen Kavallerie: {{x.offGegenKavallerie}}</p>
+-->
+	
+				<table class="table table-striped">
+				
+					<tr>
+						<th></th>
+						<th>Verteidiger</th>
+						<th>Angreifer</th>
+					</tr>
+	
+					<tr><td>Speerträger:</td>            <td>{{x.defSpeertraeger}}</td>           <td>{{x.offSpeertraeger}}</td>           </tr>
+					<tr><td>Schwertkämpfer:</td>         <td>{{x.defSchwertkaempfer}}</td>        <td>{{x.offSchwertkaempfer}}</td>        </tr>
+					<tr><td>Berserker:</td>              <td>{{x.defBerserker}}</td>              <td>{{x.offBerserker}}</td>              </tr>
+					<tr><td>Bogenschütze:</td>           <td>{{x.defBogenschuetze}}</td>          <td>{{x.offBogenschuetze}}</td>          </tr>
+					<tr><td>Armbrustschütze:</td>        <td>{{x.defArmbrustschuetze}}</td>       <td>{{x.offArmbrustschuetze}}</td>       </tr>
+					<tr><td>Nordischer Bogenschütze:</td><td>{{x.defNordischerBogenschuetze}}</td><td>{{x.offNordischerBogenschuetze}}</td></tr>
+					<tr><td>Panzerreiter:</td>           <td>{{x.defPanzerreiter}}</td>           <td>{{x.offPanzerreiter}}</td>           </tr>
+					<tr><td>Lanzenreiter:</td>           <td>{{x.defLanzenreiter}}</td>           <td>{{x.offLanzenreiter}}</td>           </tr>
+					<tr><td>Axtreiter:</td>              <td>{{x.defAxtreiter}}</td>              <td>{{x.offAxtreiter}}</td>              </tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
