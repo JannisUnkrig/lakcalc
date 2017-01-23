@@ -54,7 +54,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
     s0.defLanzenreiter            = 0;
     s0.defAxtreiter               = 0;
     
-    s0.offSpeertraeger            = 42900;
+    s0.offSpeertraeger            = 43000;
     s0.offSchwertkaempfer         = 0;
     s0.offBerserker               = 0;
     s0.offBogenschuetze           = 0;
