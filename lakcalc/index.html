@@ -36,7 +36,7 @@
 			<table class="table">
 				<tr>
 					<th></th>
-					<th colspan="{{snapshot0.defSchwertkaempfer.length}}">
+					<th colspan="{{snapshot0.def.length}}">
 						<div style="width:120px">
 							Verteidiger
 							<span class="btn-group">
@@ -46,7 +46,7 @@
 						</div>
 					</th>
 					<td>&nbsp;</td>
-					<th colspan="{{snapshot0.offSchwertkaempfer.length}}">
+					<th colspan="{{snapshot0.off.length}}">
 						<div style="width:120px">
 							Angreifer
 							<span class="btn-group">
@@ -59,66 +59,66 @@
 
 				<tr style="background-color: #eff">
 					<td>Speerträger:</td>
-					<td ng-repeat="y in indexes(snapshot0.defSpeertraeger)"><input class="form-control niw" type="number" ng-model="snapshot0.defSpeertraeger[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].speertraeger" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offSpeertraeger)"><input class="form-control niw" type="number" ng-model="snapshot0.offSpeertraeger[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].speertraeger" /></td>
 				</tr>
 				<tr style="background-color: #eff">
 					<td>Schwertkämpfer:</td>
-					<td ng-repeat="y in indexes(snapshot0.defSchwertkaempfer)"><input class="form-control niw" type="number" ng-model="snapshot0.defSchwertkaempfer[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].schwertkaempfer" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offSchwertkaempfer)"><input class="form-control niw" type="number" ng-model="snapshot0.offSchwertkaempfer[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].schwertkaempfer" /></td>
 				</tr>
 				<tr style="background-color: #eff">
 					<td>Berserker:</td>
-					<td ng-repeat="y in indexes(snapshot0.defBerserker)"><input class="form-control niw" type="number" ng-model="snapshot0.defBerserker[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].berserker" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offBerserker)"><input class="form-control niw" type="number" ng-model="snapshot0.offBerserker[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].berserker" /></td>
 				</tr>
-				<tr><td colspan="{{2 + snapshot0.defBerserker.length + snapshot0.offBerserker.length}}"></td></tr>
+				<tr><td colspan="{{2 + snapshot0.def.length + snapshot0.off.length}}"></td></tr>
 				<tr>
 					<td>Bogenschütze:</td>
-					<td ng-repeat="y in indexes(snapshot0.defBogenschuetze)"><input class="form-control niw" type="number" ng-model="snapshot0.defBogenschuetze[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].bogenschuetze" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offBogenschuetze)"><input class="form-control niw" type="number" ng-model="snapshot0.offBogenschuetze[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].bogenschuetze" /></td>
 				</tr>
 				<tr>
 					<td>Armbrustschütze:</td>
-					<td ng-repeat="y in indexes(snapshot0.defArmbrustschuetze)"><input class="form-control niw" type="number" ng-model="snapshot0.defArmbrustschuetze[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].armbrustschuetze" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offArmbrustschuetze)"><input class="form-control niw" type="number" ng-model="snapshot0.offArmbrustschuetze[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].armbrustschuetze" /></td>
 				</tr>
 				<tr>
 					<td>Nordischer Bogensschütze:</td>
-					<td ng-repeat="y in indexes(snapshot0.defNordischerBogenschuetze)"><input class="form-control niw" type="number" ng-model="snapshot0.defNordischerBogenschuetze[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].nordischerBogenschuetze" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offNordischerBogenschuetze)"><input class="form-control niw" type="number" ng-model="snapshot0.offNordischerBogenschuetze[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].nordischerBogenschuetze" /></td>
 				</tr>
-				<tr><td colspan="{{2 + snapshot0.defBerserker.length + snapshot0.offBerserker.length}}"></td></tr>
+				<tr><td colspan="{{2 + snapshot0.def.length + snapshot0.off.length}}"></td></tr>
 				<tr>
 					<td>Panzerreiter:</td>
-					<td ng-repeat="y in indexes(snapshot0.defPanzerreiter)"><input class="form-control niw" type="number" ng-model="snapshot0.defPanzerreiter[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].panzerreiter" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offPanzerreiter)"><input class="form-control niw" type="number" ng-model="snapshot0.offPanzerreiter[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].panzerreiter" /></td>
 				</tr>
 				<tr>
 					<td>Lanzenreiter:</td>
-					<td ng-repeat="y in indexes(snapshot0.defLanzenreiter)"><input class="form-control niw" type="number" ng-model="snapshot0.defLanzenreiter[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].lanzenreiter" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offLanzenreiter)"><input class="form-control niw" type="number" ng-model="snapshot0.offLanzenreiter[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].lanzenreiter" /></td>
 				</tr>
 				<tr>
 					<td>Axtreiter:</td>
-					<td ng-repeat="y in indexes(snapshot0.defAxtreiter)"><input class="form-control niw" type="number" ng-model="snapshot0.defAxtreiter[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].axtreiter" /></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offAxtreiter)"><input class="form-control niw" type="number" ng-model="snapshot0.offAxtreiter[y]" /></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"><input class="form-control niw" type="number" ng-model="snapshot0.off[y].axtreiter" /></td>
 				</tr>
-				<tr><td colspan="{{2 + snapshot0.defBerserker.length + snapshot0.offBerserker.length}}"></td></tr>
+				<tr><td colspan="{{2 + snapshot0.def.length + snapshot0.off.length}}"></td></tr>
 				<tr>
 					<td>Wehranlagen:</td>
 					<td ng-repeat="y in indexes(defWehranlagen)"><select class="form-control" ng-model="defWehranlagen[y]"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(snapshot0.offAxtreiter)"></td>
+					<td ng-repeat="y in indexes(snapshot0.off)"></td>
 				</tr>
 				<tr>
 					<td>Bibliothek:</td>
@@ -148,19 +148,55 @@
 				
 					<tr>
 						<th></th>
-						<th colspan="{{snapshot0.defSchwertkaempfer.length}}">Verteidiger</th>
-						<th colspan="{{snapshot0.offSchwertkaempfer.length}}">Angreifer</th>
+						<th colspan="{{snapshot0.def.length}}">Verteidiger</th>
+						<th colspan="{{snapshot0.off.length}}">Angreifer</th>
 					</tr>
 	
-					<tr><td>Speerträger:</td>            <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defSpeertraeger[j]}}</td>           <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offSpeertraeger[j]}}</td>           </tr>
-					<tr><td>Schwertkämpfer:</td>         <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defSchwertkaempfer[j]}}</td>        <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offSchwertkaempfer[j]}}</td>        </tr>
-					<tr><td>Berserker:</td>              <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defBerserker[j]}}</td>              <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offBerserker[j]}}</td>              </tr>
-					<tr><td>Bogenschütze:</td>           <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defBogenschuetze[j]}}</td>          <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offBogenschuetze[j]}}</td>          </tr>
-					<tr><td>Armbrustschütze:</td>        <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defArmbrustschuetze[j]}}</td>       <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offArmbrustschuetze[j]}}</td>       </tr>
-					<tr><td>Nordischer Bogenschütze:</td><td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defNordischerBogenschuetze[j]}}</td><td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offNordischerBogenschuetze[j]}}</td></tr>
-					<tr><td>Panzerreiter:</td>           <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defPanzerreiter[j]}}</td>           <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offPanzerreiter[j]}}</td>           </tr>
-					<tr><td>Lanzenreiter:</td>           <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defLanzenreiter[j]}}</td>           <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offLanzenreiter[j]}}</td>           </tr>
-					<tr><td>Axtreiter:</td>              <td ng-repeat="j in indexes(x.defSpeertraeger)">{{x.defAxtreiter[j]}}</td>              <td ng-repeat="j in indexes(x.offSpeertraeger)">{{x.offAxtreiter[j]}}</td>              </tr>
+					<tr>
+						<td>Speerträger:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].speertraeger}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].speertraeger}}</td>
+					</tr>
+					<tr>
+						<td>Schwertkämpfer:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].schwertkaempfer}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].schwertkaempfer}}</td>
+					</tr>
+					<tr>
+						<td>Berserker:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].berserker}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].berserker}}</td>
+					</tr>
+					<tr>
+						<td>Bogenschütze:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].bogenschuetze}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].bogenschuetze}}</td>
+					</tr>
+					<tr>
+						<td>Armbrustschütze:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].armbrustschuetze}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].armbrustschuetze}}</td>
+					</tr>
+					<tr>
+						<td>Nordischer Bogenschütze:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].nordischerBogenschuetze}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].nordischerBogenschuetze}}</td>
+					</tr>
+					<tr>
+						<td>Panzerreiter:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].panzerreiter}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].panzerreiter}}</td>
+					</tr>
+					<tr>
+						<td>Lanzenreiter:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].lanzenreiter}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].lanzenreiter}}</td>
+					</tr>
+					<tr>
+						<td>Axtreiter:</td>
+						<td ng-repeat="j in indexes(x.def)">{{x.def[j].axtreiter}}</td>
+						<td ng-repeat="j in indexes(x.off)">{{x.off[j].axtreiter}}</td>
+					</tr>
 				</table>
 			</div>
 
