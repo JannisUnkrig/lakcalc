@@ -227,6 +227,14 @@
 						<td ng-repeat="j in indexes(x.off)">{{x.off[j].axtreiter}}</td>
 					</tr>
 				</table>
+
+				<div class="alert alert-success" ng-if="x.alertSuccess">
+					{{x.alertSuccess}}
+				</div>
+
+				<div class="alert alert-danger" ng-if="x.alertDanger">
+					{{x.alertDanger}}
+				</div>
 			</div>
 
 			<div class="small" style="margin-top: 10px; text-align: center;">

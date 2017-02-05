@@ -3,7 +3,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		
 	// Statische Koeffizienten.
 	
-	var o = [
+	var O = [
 		[ 7, 5, 12 ],
 		[ 39, 24, 57 ],
 		[ 72, 18, 134 ],
@@ -17,7 +17,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		[ 25, 163, 81 ]
 	];
 	
-	var d = [
+	var D = [
 		[ 30, 19, 56 ],
 		[ 24, 12, 36 ],
 		[ 14, 10, 21 ],
@@ -89,10 +89,13 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	$scope.kaempfe = function() {
 
 		// Wehranlagen Verteidiger:
-		var defBonus  = [ 10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 1000 ][Number($scope.defWehranlagen[0]) - 1];
+		var DEF_BONUS = [ 10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 1000 ];
+		var defBonus = DEF_BONUS[Number($scope.defWehranlagen[0]) - 1];
+
+		var DEF_FAKTOR = [ 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2 ];
 		var defFaktor = [];
 		for (var j = 0; j < $scope.snapshot0.def.length; j++) {
-			defFaktor.push([ 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2 ][Number($scope.defWehranlagen[j]) - 1]);
+			defFaktor.push(DEF_FAKTOR[Number($scope.defWehranlagen[j]) - 1]);
 		}
 
 		// Bibliothek Angreifer:
@@ -194,18 +197,18 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			s.offGegenArtillerie = 0;
 			s.offGegenKavallerie = 0;
 			for (var j = 0; j < sm1.off.length; j++) {
-				s.offGegenInfanterie += Math.round(buffOffInfanterie[j] * o[0][0]) * sm1.off[j].speertraeger + Math.round(buffOffInfanterie[j] * o[1][0]) * sm1.off[j].schwertkaempfer + Math.round(buffOffInfanterie[j] * o[2][0]) * sm1.off[j].berserker + Math.round(buffOffArtillerie[j] * o[3][0]) * sm1.off[j].bogenschuetze + Math.round(buffOffArtillerie[j] * o[4][0]) * sm1.off[j].armbrustschuetze + Math.round(buffOffArtillerie[j] * o[5][0]) * sm1.off[j].nordischerBogenschuetze + Math.round(buffOffKavallerie[j] * o[6][0]) * sm1.off[j].panzerreiter + Math.round(buffOffKavallerie[j] * o[7][0]) * sm1.off[j].lanzenreiter + Math.round(buffOffKavallerie[j] * o[8][0]) * sm1.off[j].axtreiter;
-				s.offGegenArtillerie += Math.round(buffOffInfanterie[j] * o[0][1]) * sm1.off[j].speertraeger + Math.round(buffOffInfanterie[j] * o[1][1]) * sm1.off[j].schwertkaempfer + Math.round(buffOffInfanterie[j] * o[2][1]) * sm1.off[j].berserker + Math.round(buffOffArtillerie[j] * o[3][1]) * sm1.off[j].bogenschuetze + Math.round(buffOffArtillerie[j] * o[4][1]) * sm1.off[j].armbrustschuetze + Math.round(buffOffArtillerie[j] * o[5][1]) * sm1.off[j].nordischerBogenschuetze + Math.round(buffOffKavallerie[j] * o[6][1]) * sm1.off[j].panzerreiter + Math.round(buffOffKavallerie[j] * o[7][1]) * sm1.off[j].lanzenreiter + Math.round(buffOffKavallerie[j] * o[8][1]) * sm1.off[j].axtreiter;
-				s.offGegenKavallerie += Math.round(buffOffInfanterie[j] * o[0][2]) * sm1.off[j].speertraeger + Math.round(buffOffInfanterie[j] * o[1][2]) * sm1.off[j].schwertkaempfer + Math.round(buffOffInfanterie[j] * o[2][2]) * sm1.off[j].berserker + Math.round(buffOffArtillerie[j] * o[3][2]) * sm1.off[j].bogenschuetze + Math.round(buffOffArtillerie[j] * o[4][2]) * sm1.off[j].armbrustschuetze + Math.round(buffOffArtillerie[j] * o[5][2]) * sm1.off[j].nordischerBogenschuetze + Math.round(buffOffKavallerie[j] * o[6][2]) * sm1.off[j].panzerreiter + Math.round(buffOffKavallerie[j] * o[7][2]) * sm1.off[j].lanzenreiter + Math.round(buffOffKavallerie[j] * o[8][2]) * sm1.off[j].axtreiter;
+				s.offGegenInfanterie += Math.round(buffOffInfanterie[j] * O[0][0]) * sm1.off[j].speertraeger + Math.round(buffOffInfanterie[j] * O[1][0]) * sm1.off[j].schwertkaempfer + Math.round(buffOffInfanterie[j] * O[2][0]) * sm1.off[j].berserker + Math.round(buffOffArtillerie[j] * O[3][0]) * sm1.off[j].bogenschuetze + Math.round(buffOffArtillerie[j] * O[4][0]) * sm1.off[j].armbrustschuetze + Math.round(buffOffArtillerie[j] * O[5][0]) * sm1.off[j].nordischerBogenschuetze + Math.round(buffOffKavallerie[j] * O[6][0]) * sm1.off[j].panzerreiter + Math.round(buffOffKavallerie[j] * O[7][0]) * sm1.off[j].lanzenreiter + Math.round(buffOffKavallerie[j] * O[8][0]) * sm1.off[j].axtreiter;
+				s.offGegenArtillerie += Math.round(buffOffInfanterie[j] * O[0][1]) * sm1.off[j].speertraeger + Math.round(buffOffInfanterie[j] * O[1][1]) * sm1.off[j].schwertkaempfer + Math.round(buffOffInfanterie[j] * O[2][1]) * sm1.off[j].berserker + Math.round(buffOffArtillerie[j] * O[3][1]) * sm1.off[j].bogenschuetze + Math.round(buffOffArtillerie[j] * O[4][1]) * sm1.off[j].armbrustschuetze + Math.round(buffOffArtillerie[j] * O[5][1]) * sm1.off[j].nordischerBogenschuetze + Math.round(buffOffKavallerie[j] * O[6][1]) * sm1.off[j].panzerreiter + Math.round(buffOffKavallerie[j] * O[7][1]) * sm1.off[j].lanzenreiter + Math.round(buffOffKavallerie[j] * O[8][1]) * sm1.off[j].axtreiter;
+				s.offGegenKavallerie += Math.round(buffOffInfanterie[j] * O[0][2]) * sm1.off[j].speertraeger + Math.round(buffOffInfanterie[j] * O[1][2]) * sm1.off[j].schwertkaempfer + Math.round(buffOffInfanterie[j] * O[2][2]) * sm1.off[j].berserker + Math.round(buffOffArtillerie[j] * O[3][2]) * sm1.off[j].bogenschuetze + Math.round(buffOffArtillerie[j] * O[4][2]) * sm1.off[j].armbrustschuetze + Math.round(buffOffArtillerie[j] * O[5][2]) * sm1.off[j].nordischerBogenschuetze + Math.round(buffOffKavallerie[j] * O[6][2]) * sm1.off[j].panzerreiter + Math.round(buffOffKavallerie[j] * O[7][2]) * sm1.off[j].lanzenreiter + Math.round(buffOffKavallerie[j] * O[8][2]) * sm1.off[j].axtreiter;
 			}
 			
 			s.defGegenInfanterie = defBonus;
 			s.defGegenArtillerie = defBonus;
 			s.defGegenKavallerie = defBonus;
 			for (var j = 0; j < sm1.def.length; j++) {
-				s.defGegenInfanterie += Math.round(buffDefInfanterie[j] * d[0][0]) * sm1.def[j].speertraeger + Math.round(buffDefInfanterie[j] * d[1][0]) * sm1.def[j].schwertkaempfer + Math.round(buffDefInfanterie[j] * d[2][0]) * sm1.def[j].berserker + Math.round(buffDefArtillerie[j] * d[3][0]) * sm1.def[j].bogenschuetze + Math.round(buffDefArtillerie[j] * d[4][0]) * sm1.def[j].armbrustschuetze + Math.round(buffDefArtillerie[j] * d[5][0]) * sm1.def[j].nordischerBogenschuetze + Math.round(buffDefKavallerie[j] * d[6][0]) * sm1.def[j].panzerreiter + Math.round(buffDefKavallerie[j] * d[7][0]) * sm1.def[j].lanzenreiter + Math.round(buffDefKavallerie[j] * d[8][0]) * sm1.def[j].axtreiter;
-				s.defGegenArtillerie += Math.round(buffDefInfanterie[j] * d[0][1]) * sm1.def[j].speertraeger + Math.round(buffDefInfanterie[j] * d[1][1]) * sm1.def[j].schwertkaempfer + Math.round(buffDefInfanterie[j] * d[2][1]) * sm1.def[j].berserker + Math.round(buffDefArtillerie[j] * d[3][1]) * sm1.def[j].bogenschuetze + Math.round(buffDefArtillerie[j] * d[4][1]) * sm1.def[j].armbrustschuetze + Math.round(buffDefArtillerie[j] * d[5][1]) * sm1.def[j].nordischerBogenschuetze + Math.round(buffDefKavallerie[j] * d[6][1]) * sm1.def[j].panzerreiter + Math.round(buffDefKavallerie[j] * d[7][1]) * sm1.def[j].lanzenreiter + Math.round(buffDefKavallerie[j] * d[8][1]) * sm1.def[j].axtreiter;
-				s.defGegenKavallerie += Math.round(buffDefInfanterie[j] * d[0][2]) * sm1.def[j].speertraeger + Math.round(buffDefInfanterie[j] * d[1][2]) * sm1.def[j].schwertkaempfer + Math.round(buffDefInfanterie[j] * d[2][2]) * sm1.def[j].berserker + Math.round(buffDefArtillerie[j] * d[3][2]) * sm1.def[j].bogenschuetze + Math.round(buffDefArtillerie[j] * d[4][2]) * sm1.def[j].armbrustschuetze + Math.round(buffDefArtillerie[j] * d[5][2]) * sm1.def[j].nordischerBogenschuetze + Math.round(buffDefKavallerie[j] * d[6][2]) * sm1.def[j].panzerreiter + Math.round(buffDefKavallerie[j] * d[7][2]) * sm1.def[j].lanzenreiter + Math.round(buffDefKavallerie[j] * d[8][2]) * sm1.def[j].axtreiter;
+				s.defGegenInfanterie += Math.round(buffDefInfanterie[j] * D[0][0]) * sm1.def[j].speertraeger + Math.round(buffDefInfanterie[j] * D[1][0]) * sm1.def[j].schwertkaempfer + Math.round(buffDefInfanterie[j] * D[2][0]) * sm1.def[j].berserker + Math.round(buffDefArtillerie[j] * D[3][0]) * sm1.def[j].bogenschuetze + Math.round(buffDefArtillerie[j] * D[4][0]) * sm1.def[j].armbrustschuetze + Math.round(buffDefArtillerie[j] * D[5][0]) * sm1.def[j].nordischerBogenschuetze + Math.round(buffDefKavallerie[j] * D[6][0]) * sm1.def[j].panzerreiter + Math.round(buffDefKavallerie[j] * D[7][0]) * sm1.def[j].lanzenreiter + Math.round(buffDefKavallerie[j] * D[8][0]) * sm1.def[j].axtreiter;
+				s.defGegenArtillerie += Math.round(buffDefInfanterie[j] * D[0][1]) * sm1.def[j].speertraeger + Math.round(buffDefInfanterie[j] * D[1][1]) * sm1.def[j].schwertkaempfer + Math.round(buffDefInfanterie[j] * D[2][1]) * sm1.def[j].berserker + Math.round(buffDefArtillerie[j] * D[3][1]) * sm1.def[j].bogenschuetze + Math.round(buffDefArtillerie[j] * D[4][1]) * sm1.def[j].armbrustschuetze + Math.round(buffDefArtillerie[j] * D[5][1]) * sm1.def[j].nordischerBogenschuetze + Math.round(buffDefKavallerie[j] * D[6][1]) * sm1.def[j].panzerreiter + Math.round(buffDefKavallerie[j] * D[7][1]) * sm1.def[j].lanzenreiter + Math.round(buffDefKavallerie[j] * D[8][1]) * sm1.def[j].axtreiter;
+				s.defGegenKavallerie += Math.round(buffDefInfanterie[j] * D[0][2]) * sm1.def[j].speertraeger + Math.round(buffDefInfanterie[j] * D[1][2]) * sm1.def[j].schwertkaempfer + Math.round(buffDefInfanterie[j] * D[2][2]) * sm1.def[j].berserker + Math.round(buffDefArtillerie[j] * D[3][2]) * sm1.def[j].bogenschuetze + Math.round(buffDefArtillerie[j] * D[4][2]) * sm1.def[j].armbrustschuetze + Math.round(buffDefArtillerie[j] * D[5][2]) * sm1.def[j].nordischerBogenschuetze + Math.round(buffDefKavallerie[j] * D[6][2]) * sm1.def[j].panzerreiter + Math.round(buffDefKavallerie[j] * D[7][2]) * sm1.def[j].lanzenreiter + Math.round(buffDefKavallerie[j] * D[8][2]) * sm1.def[j].axtreiter;
 			}
 
 			// Honor nighttime bonus.
@@ -282,8 +285,16 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			}
 			
 			$scope.snapshot[i] = s;
-			
-			if (f == endkampf || i > 50) break;
+
+			if (numOffUnits <= 100 || i > 50) {
+				$scope.snapshot[i].alertSuccess = "Verteidiger gewinnt"; // Greenish
+				break;
+			}
+
+			if (numDefUnits <= 100 || i > 50) {
+				$scope.snapshot[i].alertDanger = "Angreifer gewinnt"; // Reddish
+				break;
+			}
 		}
 	};
 	
