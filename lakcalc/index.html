@@ -36,12 +36,24 @@
 			<table class="table">
 				<tr>
 					<th></th>
-					<th colspan="{{snapshot0.def.length}}">
+					<th ng-if="snapshot0.def.length == 1">
 						<div style="width:120px">
 							Verteidiger
-							<span                                           class="btn-group">
-								<button type="button" ng-click="defPlus()"  class="btn btn-secondary btn-xs" style="background-color: #eee">+</button>
-								<button type="button" ng-click="defMinus()" class="btn btn-secondary btn-xs" style="background-color: #eee">-</button>
+							<span class="btn-group">
+								<button type="button"                                   ng-click="defPlus()"  class="btn btn-secondary btn-xs" style="background-color: #eee">+</button>
+								<button type="button" ng-disabled="defType.length == 1" ng-click="defMinus()" class="btn btn-secondary btn-xs" style="background-color: #eee">-</button>
+							</span>
+						</div>
+					</th>
+					<th ng-if="snapshot0.def.length > 1">
+						<div>Verteidiger</div>
+					</th>
+					<th ng-if="snapshot0.def.length > 1" colspan="{{snapshot0.def.length - 1}}">
+						<div style="width:140px">
+							Unterst&uuml;tzer
+							<span class="btn-group">
+								<button type="button"                                   ng-click="defPlus()"  class="btn btn-secondary btn-xs" style="background-color: #eee">+</button>
+								<button type="button" ng-disabled="defType.length == 1" ng-click="defMinus()" class="btn btn-secondary btn-xs" style="background-color: #eee">-</button>
 							</span>
 						</div>
 					</th>
@@ -49,14 +61,21 @@
 					<th colspan="{{snapshot0.off.length}}">
 						<div style="width:120px">
 							Angreifer
-							<span                                           class="btn-group">
-								<button type="button" ng-click="offPlus()"  class="btn btn-secondary btn-xs" style="background-color: #eee">+</button>
-								<button type="button" ng-click="offMinus()" class="btn btn-secondary btn-xs" style="background-color: #eee">-</button>
+							<span class="btn-group">
+								<button type="button"                                   ng-click="offPlus()" class="btn btn-secondary btn-xs" style="background-color: #eee">+</button>
+								<button type="button" ng-disabled="offType.length == 1" ng-click="offMinus()" class="btn btn-secondary btn-xs" style="background-color: #eee">-</button>
 							</span>
 						</div>
 					</th>
 				</tr>
 
+				<tr>
+					<td>Typ:</td>
+					<td ng-repeat="y in indexes(defType)"><select class="niw form-control" ng-model="defType[y]"><option>Burg</option><option>Festung</option><option>Stadt</option></select></td>
+					<td>&nbsp;</td>
+					<td ng-repeat="y in indexes(offType)"><select class="niw form-control" ng-model="offType[y]"><option>Burg</option><option>Festung</option><option>Stadt</option></select></td>
+				</tr>
+				
 				<tr style="background-color: #def">
 					<td>Speertr&auml;ger:</td>
 					<td ng-repeat="y in indexes(snapshot0.def)"><input class="form-control niw" type="number" ng-model="snapshot0.def[y].speertraeger" /></td>
@@ -116,15 +135,25 @@
 				<tr><td colspan="{{2 + snapshot0.def.length + snapshot0.off.length}}"></td></tr>
 				<tr>
 					<td>Wehranlagen:</td>
-					<td ng-repeat="y in indexes(defWehranlagen)"><select class="form-control" ng-model="defWehranlagen[y]"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
+					<td ng-repeat="y in indexes(defWehranlagen)"><select class="niw form-control" ng-model="defWehranlagen[y]"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
 					<td>&nbsp;</td>
 					<td ng-repeat="y in indexes(snapshot0.off)"></td>
 				</tr>
 				<tr>
 					<td>Bibliothek:</td>
-					<td ng-repeat="y in indexes(defBibliothek)"><select class="form-control" ng-model="defBibliothek[y]"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></td>
+					<td ng-repeat="y in indexes(defBibliothek)"><select class="niw form-control" ng-model="defBibliothek[y]"                             ><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
 					<td>&nbsp;</td>
-					<td ng-repeat="y in indexes(offBibliothek)"><select class="form-control" ng-model="offBibliothek[y]"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></td>
+					<td ng-repeat="y in indexes(offBibliothek)"><select class="niw form-control" ng-model="offBibliothek[y]" ng-if="offType[y] == 'Burg'"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>
+				</tr>
+				<tr ng-if="offType.indexOf('Festung') != -1">
+					<td>Kaserne:</td>
+					<td ng-repeat="y in indexes(snapshot0.def)"></td>
+					<td>&nbsp;</td>
+					<td ng-repeat="y in indexes(offKaserne)">
+						<select class="niw form-control" ng-model="offKaserne[y]" ng-if="offType[y] == 'Festung'">
+							<option ng-repeat="y in naturals(1, 30)">{{y}}</option>
+						</select>
+					</td>
 				</tr>
 			</table>
 

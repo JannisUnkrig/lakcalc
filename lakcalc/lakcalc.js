@@ -32,9 +32,12 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	];
 
 	// Initialwerte für Boni.
+	$scope.defType        = [ "Burg" ];
+	$scope.offType        = [ "Burg" ];
 	$scope.defWehranlagen = [ "1" ];
 	$scope.defBibliothek  = [ "1" ];
 	$scope.offBibliothek  = [ "1" ];
+	$scope.offKaserne     = [ "1" ];
 
 	// Initialwerte für 0. Snapshot.
 	var uhrzeit = new Date();
@@ -99,18 +102,37 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		for (var j = 0; j < $scope.snapshot0.off.length; j++) {
 		
 			var offBibliothek = Number($scope.offBibliothek[j]);
+			var offType       = $scope.offType[j];
 			
-			buffOffInfanterie[j] = 1;
-			if (offBibliothek >= 3) buffOffInfanterie[j] *= 1.05;
-			if (offBibliothek >= 7) buffOffInfanterie[j] *= 1.05;
-
-			buffOffArtillerie[j] = 1;
-			if (offBibliothek >= 3) buffOffArtillerie[j] *= 1.05;
-			if (offBibliothek >= 8) buffOffArtillerie[j] *= 1.05;
-
-			buffOffKavallerie[j] = 1;
-			if (offBibliothek >= 3) buffOffKavallerie[j] *= 1.05;
-			if (offBibliothek >= 9) buffOffKavallerie[j] *= 1.05;
+			switch (offType) {
+			
+			case "Burg":
+				buffOffInfanterie[j] = 1;
+				if (offBibliothek >= 3) buffOffInfanterie[j] *= 1.05;
+				if (offBibliothek >= 7) buffOffInfanterie[j] *= 1.05;
+	
+				buffOffArtillerie[j] = 1;
+				if (offBibliothek >= 3) buffOffArtillerie[j] *= 1.05;
+				if (offBibliothek >= 8) buffOffArtillerie[j] *= 1.05;
+	
+				buffOffKavallerie[j] = 1;
+				if (offBibliothek >= 3) buffOffKavallerie[j] *= 1.05;
+				if (offBibliothek >= 9) buffOffKavallerie[j] *= 1.05;
+				break;
+			
+			case "Festung":
+				buffOffInfanterie[j] = 1.05 * 1.05;
+	
+				buffOffArtillerie[j] = 1.05 * 1.05;
+	
+				buffOffKavallerie[j] = 1.05 * 1.05;
+				break;
+				
+			case "Stadt":
+				alert("Stadt NYI.");
+				throw new Error("Stadt NYI");
+			
+			}
 		}
 		
 		// Bibliothek Verteidiger:
@@ -120,21 +142,42 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		for (var j = 0; j < $scope.snapshot0.def.length; j++) {
 
 			var defBibliothek = Number($scope.defBibliothek[j]);
+			var defType       = $scope.defType[j];
 			
-			buffDefInfanterie[j] = defFaktor[j];
-			if (defBibliothek >= 3)  buffDefInfanterie[j] *= 1.05;
-			if (defBibliothek >= 4)  buffDefInfanterie[j] *= 1.05;
-			if (defBibliothek >= 10) buffDefInfanterie[j] *= 1.05;
-
-			buffDefArtillerie[j] = defFaktor[j];
-			if (defBibliothek >= 3)  buffDefArtillerie[j] *= 1.05;
-			if (defBibliothek >= 6)  buffDefArtillerie[j] *= 1.05;
-			if (defBibliothek >= 10) buffDefArtillerie[j] *= 1.05;
-
-			buffDefKavallerie[j] = defFaktor[j];
-			if (defBibliothek >= 3)  buffDefKavallerie[j] *= 1.05;
-			if (defBibliothek >= 6)  buffDefKavallerie[j] *= 1.05;
-			if (defBibliothek >= 10) buffDefKavallerie[j] *= 1.05;
+			switch (defType) {
+			
+			case "Burg":
+				buffDefInfanterie[j] = defFaktor[j];
+				if (defBibliothek >= 3)  buffDefInfanterie[j] *= 1.05;
+				if (defBibliothek >= 4)  buffDefInfanterie[j] *= 1.05;
+				if (defBibliothek >= 10) buffDefInfanterie[j] *= 1.05;
+	
+				buffDefArtillerie[j] = defFaktor[j];
+				if (defBibliothek >= 3)  buffDefArtillerie[j] *= 1.05;
+				if (defBibliothek >= 6)  buffDefArtillerie[j] *= 1.05;
+				if (defBibliothek >= 10) buffDefArtillerie[j] *= 1.05;
+	
+				buffDefKavallerie[j] = defFaktor[j];
+				if (defBibliothek >= 3)  buffDefKavallerie[j] *= 1.05;
+				if (defBibliothek >= 6)  buffDefKavallerie[j] *= 1.05;
+				if (defBibliothek >= 10) buffDefKavallerie[j] *= 1.05;
+				break;
+				
+			case "Festung":
+				buffDefInfanterie[j] = defFaktor[j] * 1.05 * 1.05 * 1.05;
+				if (defBibliothek >= 4) buffDefInfanterie[j] *= 1.05; // Kettenhemd
+	
+				buffDefArtillerie[j] = defFaktor[j] * 1.05 * 1.05 * 1.05;
+				if (defBibliothek >= 6) buffDefArtillerie[j] *= 1.05; // Pavese
+	
+				buffDefKavallerie[j] = defFaktor[j] * 1.05 * 1.05 * 1.05;
+				if (defBibliothek >= 8) buffDefKavallerie[j] *= 1.05; // Plattenpanzerung
+				break;
+				
+			case "Stadt":
+				alert("Stadt NYI.");
+				throw new Error("Stadt NYI");
+			}
 		}
 	
 		for (var i = 0;; i++) {
@@ -246,6 +289,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	
 	$scope.defPlus = function() {
 	
+		$scope.defType.push("Burg");
 		$scope.snapshot0.def.push({
 			speertraeger:            0,
 			schwertkaempfer:         0,
@@ -262,12 +306,14 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	}
 	
 	$scope.defMinus = function() {
+		$scope.defType.pop();
 		$scope.snapshot0.def.pop();
 		$scope.defWehranlagen.pop();
 		$scope.defBibliothek.pop();
 	}
 	
 	$scope.offPlus = function() {
+		$scope.offType.push("Burg");
 		$scope.snapshot0.off.push({
 			speertraeger:            0,
 			schwertkaempfer:         0,
@@ -280,16 +326,25 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			axtreiter:               0,
 		});
 		$scope.offBibliothek.push("1");
+		$scope.offKaserne.push("1");
 	}
 	
 	$scope.offMinus = function() {
+		$scope.offType.pop();
 		$scope.snapshot0.off.pop();
 		$scope.offBibliothek.pop();
+		$scope.offKaserne.pop();
 	}
-	
+
 	$scope.indexes = function(a) {
 		var result = [];
 		for (var i = 0; i < a.length; i++) result.push(i);
+		return result;
+	}
+
+	$scope.naturals = function(from, to) {
+		var result = [];
+		for (var i = from; i <= to; i++) result.push(i);
 		return result;
 	}
 });
