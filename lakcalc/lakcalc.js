@@ -98,6 +98,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		"Stadt":   [ 99 ],
 	};
 
+	$scope.BUFF_OFF_KASERNE = [ 1.01, 1.02, 1.02, 1.03, 1.04, 1.04, 1.05, 1.06, 1.06, 1.07, 1.08, 1.08, 1.09, 1.10, 1.10, 1.11, 1.12, 1.12, 1.13, 1.14, 1.14, 1.15, 1.16, 1.16, 1.17, 1.18, 1.18, 1.19, 1.19, 1.20 ];
+
 	$scope.kaempfe = function() {
 
 		delete $scope.alertSuccess; // Greenish
@@ -201,7 +203,17 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				throw new Error("Stadt NYI");
 			}
 		}
-	
+
+		// Kaserne:
+		for (var j = 0; j < $scope.snapshot0.off.length; j++) {
+		
+			if ($scope.offType[j] == "Festung") {
+				buffOffInfanterie[j] *= $scope.BUFF_OFF_KASERNE[$scope.offKaserne[j] - 1];
+				buffOffArtillerie[j] *= $scope.BUFF_OFF_KASERNE[$scope.offKaserne[j] - 1];
+				buffOffKavallerie[j] *= $scope.BUFF_OFF_KASERNE[$scope.offKaserne[j] - 1];
+			}
+		}	
+		
 		for (var i = 0;; i++) {
 		
 			// Kampfstärken berechnen.
@@ -311,7 +323,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 
 				if (
 					s.offGegenInfanterie + s.offGegenArtillerie + s.offGegenKavallerie
-					< s.defGegenInfanterie + s.defGegenArtillerie + s.defGegenKavallerie
+					<= s.defGegenInfanterie + s.defGegenArtillerie + s.defGegenKavallerie
 				) {
 					$scope.alertSuccess = "Verteidiger gewinnt"; // Greenish
 				} else {
