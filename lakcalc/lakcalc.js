@@ -86,16 +86,36 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		return fremdeDagegen > eigeneDagegen ? 0 : Math.round(eigeneTruppen * (1 - fremdeDagegen / eigeneDagegen));
 	}
 	
+	$scope.DEF_BONUS = {
+		"Burg":    [ 10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 1000 ],
+		"Festung": [ 3000, 3172, 3345, 3517, 3690, 3862, 4034, 4207, 4379, 4552, 4724, 4897, 5069, 5241, 5414, 5586, 5759, 5931, 6103, 6276, 6448, 6621, 6793, 6966, 7138, 7310, 7483, 7655, 7828, 8000 ],
+		"Stadt":   [ 99 ],
+	};
+
+	$scope.DEF_FAKTOR = {
+		"Burg":    [ 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2 ],
+		"Festung": [ 1.75, 1.77, 1.79, 1.81, 1.83, 1.84, 1.86, 1.88, 1.90, 1.92, 1.94, 1.96, 2.02, 2, 2.01, 2.03, 2.05, 2.07, 2.09, 2.11, 2.13, 2.15, 2.17, 2.18, 2.20, 2.22, 2.24, 2.26, 2.28, 2.30 ],
+		"Stadt":   [ 99 ],
+	};
+
 	$scope.kaempfe = function() {
 
-		// Wehranlagen Verteidiger:
-		var DEF_BONUS = [ 10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 1000 ];
-		var defBonus = DEF_BONUS[Number($scope.defWehranlagen[0]) - 1];
+		delete $scope.alertSuccess; // Greenish
+		delete $scope.alertDanger;  // Reddish
 
-		var DEF_FAKTOR = [ 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2 ];
+		// Wehranlagen Verteidiger:
+		var wehranlagen = Number($scope.defWehranlagen[0]);
+
+		// Bonus Verteidiger:
+		var defBonus = $scope.DEF_BONUS[$scope.defType[0]][wehranlagen - 1];
+
+		// Faktor Verteidiger:
 		var defFaktor = [];
 		for (var j = 0; j < $scope.snapshot0.def.length; j++) {
-			defFaktor.push(DEF_FAKTOR[Number($scope.defWehranlagen[j]) - 1]);
+		
+			var wehranlagen = Number($scope.defWehranlagen[j]);
+
+			defFaktor.push($scope.DEF_FAKTOR[$scope.defType[j]][wehranlagen - 1]);
 		}
 
 		// Bibliothek Angreifer:
@@ -134,7 +154,6 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			case "Stadt":
 				alert("Stadt NYI.");
 				throw new Error("Stadt NYI");
-			
 			}
 		}
 		
@@ -283,16 +302,22 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 					axtreiter:               f(s.offGegenKavallerie, s.defGegenKavallerie, sm1.def[j].axtreiter)
 				});
 			}
-			
+
 			$scope.snapshot[i] = s;
 
-			if (numOffUnits <= 100 || i > 50) {
-				$scope.snapshot[i].alertSuccess = "Verteidiger gewinnt"; // Greenish
-				break;
-			}
+			if (i > 50) break; // Terminate iteration to prevent endless looping.
 
-			if (numDefUnits <= 100 || i > 50) {
-				$scope.snapshot[i].alertDanger = "Angreifer gewinnt"; // Reddish
+			if (f == endkampf) {
+
+				if (
+					s.offGegenInfanterie + s.offGegenArtillerie + s.offGegenKavallerie
+					< s.defGegenInfanterie + s.defGegenArtillerie + s.defGegenKavallerie
+				) {
+					$scope.alertSuccess = "Verteidiger gewinnt"; // Greenish
+				} else {
+					$scope.alertDanger  = "Angreifer gewinnt"; // Reddish
+				}
+
 				break;
 			}
 		}

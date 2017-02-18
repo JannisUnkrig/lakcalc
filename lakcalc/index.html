@@ -135,7 +135,9 @@
 				<tr><td colspan="{{2 + snapshot0.def.length + snapshot0.off.length}}"></td></tr>
 				<tr>
 					<td>Wehranlagen:</td>
-					<td ng-repeat="y in indexes(defWehranlagen)"><select class="niw form-control" ng-model="defWehranlagen[y]"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select></td>
+					<td ng-repeat="y in indexes(defWehranlagen)"><select class="niw form-control" ng-model="defWehranlagen[y]">
+						<option ng-repeat="z in indexes(DEF_BONUS[defType[y]])">{{z + 1}}</option>
+					</select></td>
 					<td>&nbsp;</td>
 					<td ng-repeat="y in indexes(snapshot0.off)"></td>
 				</tr>
@@ -227,14 +229,14 @@
 						<td ng-repeat="j in indexes(x.off)">{{x.off[j].axtreiter}}</td>
 					</tr>
 				</table>
+			</div>
 
-				<div class="alert alert-success" ng-if="x.alertSuccess">
-					{{x.alertSuccess}}
-				</div>
+			<div class="alert alert-success" ng-if="alertSuccess">
+				{{alertSuccess}}
+			</div>
 
-				<div class="alert alert-danger" ng-if="x.alertDanger">
-					{{x.alertDanger}}
-				</div>
+			<div class="alert alert-danger" ng-if="alertDanger">
+				{{alertDanger}}
 			</div>
 
 			<div class="small" style="margin-top: 10px; text-align: center;">
