@@ -1,7 +1,7 @@
 
 angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller('myCtrl', function($scope) {
 		
-	// Statische Koeffizienten.
+	// Static Coefficients.
 	
 	var O = [
 		[ 7, 5, 12 ],
@@ -31,7 +31,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		[ 11, 17, 13 ]
 	];
 
-	// Initialwerte für Boni.
+	// Initial bonus values.
 	$scope.defType        = [ "Burg" ];
 	$scope.offType        = [ "Burg" ];
 	$scope.defWehranlagen = [ "1" ];
@@ -39,7 +39,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	$scope.offBibliothek  = [ "1" ];
 	$scope.offKaserne     = [ "1" ];
 
-	// Initialwerte für 0. Snapshot.
+	// Initial values for the 0th snapshot.
 	var uhrzeit = new Date();
 	uhrzeit.setHours(12, 0);
 	$scope.snapshot0 = {
@@ -74,7 +74,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 
 	$scope.snapshot = [];
 	
-	// Funktionen.
+	// Fighting functions:
 
 	var kampf = function(fremdeDagegen, eigeneDagegen, eigeneTruppen) {
 		var x = 1 - 0.5 * fremdeDagegen / eigeneDagegen;
@@ -107,33 +107,38 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		delete $scope.alertSuccess; // Greenish
 		delete $scope.alertDanger;  // Reddish
 
-		// Wehranlagen Verteidiger:
+		// Get 0th defender's fortifications:
 		var wehranlagen = Number($scope.defWehranlagen[0]);
 
-		// Bonus Verteidiger:
+		// Compute defenders' bonuses:
 		var defBonus = $scope.DEF_BONUS[$scope.defType[0]][wehranlagen - 1];
 
-		// Faktor Verteidiger:
+		// Compute defenders' factors.
 		var defFaktor = [];
 		for (var j = 0; j < $scope.snapshot0.def.length; j++) {
 		
+			// Get defender's fortifications:
 			var wehranlagen = Number($scope.defWehranlagen[j]);
 
+			// Compute defender's factor.
 			defFaktor.push($scope.DEF_FAKTOR[$scope.defType[j]][wehranlagen - 1]);
 		}
 
-		// Bibliothek Angreifer:
+		// Attackers' buffs:
 		var buffOffInfanterie = [];
 		var buffOffArtillerie = [];
 		var buffOffKavallerie = [];
 		for (var j = 0; j < $scope.snapshot0.off.length; j++) {
 		
+			// Get attacker's libraries:
 			var offBibliothek = Number($scope.offBibliothek[j]);
 			var offType       = $scope.offType[j];
 			
 			switch (offType) {
 			
 			case "Burg":
+
+				// Compute attacker's buffs for "castle" type.
 				buffOffInfanterie[j] = 1;
 				if (offBibliothek >= 3) buffOffInfanterie[j] *= 1.05;
 				if (offBibliothek >= 7) buffOffInfanterie[j] *= 1.05;
@@ -148,6 +153,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				break;
 			
 			case "Festung":
+
+				// Compute attacker's buffs for "fortress" type.
 				buffOffInfanterie[j] = 1.05 * 1.05;
 	
 				buffOffArtillerie[j] = 1.05 * 1.05;
@@ -156,23 +163,28 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				break;
 				
 			case "Stadt":
+
+				// Compute attacker's buffs for "city" type.
 				alert("Stadt NYI.");
 				throw new Error("Stadt NYI");
 			}
 		}
 		
-		// Bibliothek Verteidiger:
+		// Defenders' buffs.
 		var buffDefInfanterie = [];
 		var buffDefArtillerie = [];
 		var buffDefKavallerie = [];
 		for (var j = 0; j < $scope.snapshot0.def.length; j++) {
 
+			// Get defender's libraries.
 			var defBibliothek = Number($scope.defBibliothek[j]);
 			var defType       = $scope.defType[j];
 			
 			switch (defType) {
 			
 			case "Burg":
+
+				// Compute defender's buffs for "castle" type.
 				buffDefInfanterie[j] = defFaktor[j];
 				if (defBibliothek >= 3)  buffDefInfanterie[j] *= 1.05;
 				if (defBibliothek >= 4)  buffDefInfanterie[j] *= 1.05;
@@ -190,6 +202,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				break;
 				
 			case "Festung":
+
+				// Compute defender's buffs for "fortress" type.
 				buffDefInfanterie[j] = defFaktor[j] * 1.05 * 1.05 * 1.05;
 				if (defBibliothek >= 4) buffDefInfanterie[j] *= 1.05; // Kettenhemd
 	
@@ -201,12 +215,14 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				break;
 				
 			case "Stadt":
+
+				// Compute defender's buffs for "city" type.
 				alert("Stadt NYI.");
 				throw new Error("Stadt NYI");
 			}
 		}
 
-		// Kaserne:
+		// Modify offenders' buffs for barracks.
 		for (var j = 0; j < $scope.snapshot0.off.length; j++) {
 		
 			if ($scope.offType[j] == "Festung") {
@@ -218,14 +234,13 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 		
 		for (var i = 0;; i++) {
 		
-			// Kampfstärken berechnen.
 			var sm1 = i == 0 ? $scope.snapshot0 : $scope.snapshot[i - 1];
 			var s = {};
 
 			s.uhrzeit = new Date(sm1.uhrzeit);
 			s.uhrzeit.setMinutes(s.uhrzeit.getMinutes() + 10);
 			
-			// Compute combat powers.
+			// Compute attackers's combat powers.
 			s.offGegenInfanterie = 0;
 			s.offGegenArtillerie = 0;
 			s.offGegenKavallerie = 0;
@@ -235,6 +250,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				s.offGegenKavallerie += Math.round(buffOffInfanterie[j] * O[0][2]) * sm1.off[j].speertraeger + Math.round(buffOffInfanterie[j] * O[1][2]) * sm1.off[j].schwertkaempfer + Math.round(buffOffInfanterie[j] * O[2][2]) * sm1.off[j].berserker + Math.round(buffOffArtillerie[j] * O[3][2]) * sm1.off[j].bogenschuetze + Math.round(buffOffArtillerie[j] * O[4][2]) * sm1.off[j].armbrustschuetze + Math.round(buffOffArtillerie[j] * O[5][2]) * sm1.off[j].nordischerBogenschuetze + Math.round(buffOffKavallerie[j] * O[6][2]) * sm1.off[j].panzerreiter + Math.round(buffOffKavallerie[j] * O[7][2]) * sm1.off[j].lanzenreiter + Math.round(buffOffKavallerie[j] * O[8][2]) * sm1.off[j].axtreiter;
 			}
 			
+			// Compute defenders's combat powers.
 			s.defGegenInfanterie = defBonus;
 			s.defGegenArtillerie = defBonus;
 			s.defGegenKavallerie = defBonus;
@@ -286,7 +302,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 
 			var f = numOffUnits <= 100 || numDefUnits <= 100 ? endkampf : kampf;
 			
-			// Combat - compute number of survivors.
+			// Combat - compute attackers' casualties.
 			s.off = [];
 			for (var j = 0; j < sm1.off.length; j++) {
 				s.off.push({
@@ -302,6 +318,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				});
 			}
 			
+			// Combat - compute defenders' casualties.
 			s.def = [];
 			for (var j = 0; j < sm1.def.length; j++) {
 				s.def.push({
@@ -321,6 +338,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 
 			if (i > 50) break; // Terminate iteration to prevent endless looping.
 
+			// Check who won after terminal battle.
 			if (f == endkampf) {
 
 				if (
