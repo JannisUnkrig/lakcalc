@@ -102,6 +102,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 
 	$scope.kaempfe = function() {
 
+		$scope.snapshot = [];
+
 		delete $scope.alertSuccess; // Greenish
 		delete $scope.alertDanger;  // Reddish
 
