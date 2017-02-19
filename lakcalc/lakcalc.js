@@ -32,8 +32,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	];
 
 	// Initial bonus values.
-	$scope.defType        = [ "Burg" ];
-	$scope.offType        = [ "Burg" ];
+	$scope.defType        = [ "castle" ];
+	$scope.offType        = [ "castle" ];
 	$scope.defWehranlagen = [ "1" ];
 	$scope.defBibliothek  = [ "1" ];
 	$scope.offBibliothek  = [ "1" ];
@@ -73,7 +73,79 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	};
 
 	$scope.snapshot = [];
-	
+
+	var lbl = {
+		en: {
+			title:            "Lords and Knights Battle Calculator",
+			arrivalTime:      "Arrival time",
+			defender:         "Defender",
+			supporter:        "Supporter",
+			attacker:         "Attacker",
+			type:             "Type",
+			castle:           "Castle",
+			fortress:         "Fortress",
+			city:             "City",
+			spearmen:         "Spearmen",
+			swordsmen:        "Swordsmen",
+			berserkers:       "Berserkers",
+			archers:          "Archers",
+			crossbowmen:      "Crossbowmen",
+			nordicArchers:    "Nordic Archers",
+			armouredHorsemen: "Armoured Horsemen",
+			lancerHorsemen:   "Lancer Horsemen",
+			axeRider:         "Axe Rider",
+			fortifications:   "Fortifications",
+			library:          "Library",
+			barracks:         "Barracks",
+			fight:            "Fight",
+			battleAt:         "Battle at",
+			nightmode:        "Nightmode",
+			defensiveValues:  "Defensive values",
+			offensiveValues:  "Offensive values",
+			infantry:         "Infantry",
+			artillery:        "Artillery",
+			cavalry:          "Cavalry",
+			defenderWins:     "Defender wins",
+			attackerWins:     "Attacker wins",
+			footer:           "Want to report bugs, contribute, or just pat someone's back? Visit us on <a href=\"https://github.com/JannisUnkrig/lakcalc\" target=\"_top\">Github</a>.",
+		},
+		de: {
+			title:            "Lords and Knights-Kampfrechner",
+			arrivalTime:      "Ankunftszeit",
+			defender:         "Verteidiger",
+			supporter:        "Unterstützer",
+			attacker:         "Angreifer",
+			type:             "Typ",
+			castle:           "Burg",
+			fortress:         "Festung",
+			city:             "Stadt",
+			spearmen:         "Speerträger",
+			swordsmen:        "Schwertkämpfer",
+			berserkers:       "Berserker",
+			archers:          "Bogenschützen",
+			crossbowmen:      "Armbrustschützen",
+			nordicArchers:    "Nordische Bogenschützen",
+			armouredHorsemen: "Panzerreiter",
+			lancerHorsemen:   "Lanzenreiter",
+			axeRider:         "Axtreiter",
+			fortifications:   "Wehranlagen",
+			library:          "Bibliothek",
+			barracks:         "Kaserne",
+			fight:            "Kämpfe",
+			battleAt:         "Kampf um",
+			nightmode:        "Nachtmodus",
+			defensiveValues:  "Defensivwerte",
+			offensiveValues:  "Offensivwerte",
+			infantry:         "Infanterie",
+			artillery:        "Artillerie",
+			cavalry:          "Kavallerie",
+			defenderWins:     "Verteidiger gewinnt",
+			attackerWins:     "Angreifer gewinnt",
+			footer:           "Du willst Bugs melden, zum Code beitragen oder einfach nur jemanden loben? Besuch uns auf <a href=\"https://github.com/JannisUnkrig/lakcalc\" target=\"_top\">Github</a>.",
+		},
+	};
+	$scope.i18n = lbl.en;
+
 	// Fighting functions:
 
 	var kampf = function(fremdeDagegen, eigeneDagegen, eigeneTruppen) {
@@ -87,15 +159,15 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	}
 	
 	$scope.DEF_BONUS = {
-		"Burg":    [ 10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 1000 ],
-		"Festung": [ 3000, 3172, 3345, 3517, 3690, 3862, 4034, 4207, 4379, 4552, 4724, 4897, 5069, 5241, 5414, 5586, 5759, 5931, 6103, 6276, 6448, 6621, 6793, 6966, 7138, 7310, 7483, 7655, 7828, 8000 ],
-		"Stadt":   [ 99 ],
+		"castle":   [ 10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 1000 ],
+		"fortress": [ 3000, 3172, 3345, 3517, 3690, 3862, 4034, 4207, 4379, 4552, 4724, 4897, 5069, 5241, 5414, 5586, 5759, 5931, 6103, 6276, 6448, 6621, 6793, 6966, 7138, 7310, 7483, 7655, 7828, 8000 ],
+		"city":     [ 99 ],
 	};
 
 	$scope.DEF_FAKTOR = {
-		"Burg":    [ 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2 ],
-		"Festung": [ 1.75, 1.77, 1.79, 1.81, 1.83, 1.84, 1.86, 1.88, 1.90, 1.92, 1.94, 1.96, 2.02, 2, 2.01, 2.03, 2.05, 2.07, 2.09, 2.11, 2.13, 2.15, 2.17, 2.18, 2.20, 2.22, 2.24, 2.26, 2.28, 2.30 ],
-		"Stadt":   [ 99 ],
+		"castle":   [ 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2 ],
+		"fortress": [ 1.75, 1.77, 1.79, 1.81, 1.83, 1.84, 1.86, 1.88, 1.90, 1.92, 1.94, 1.96, 2.02, 2, 2.01, 2.03, 2.05, 2.07, 2.09, 2.11, 2.13, 2.15, 2.17, 2.18, 2.20, 2.22, 2.24, 2.26, 2.28, 2.30 ],
+		"city":     [ 99 ],
 	};
 
 	$scope.BUFF_OFF_KASERNE = [ 1.01, 1.02, 1.02, 1.03, 1.04, 1.04, 1.05, 1.06, 1.06, 1.07, 1.08, 1.08, 1.09, 1.10, 1.10, 1.11, 1.12, 1.12, 1.13, 1.14, 1.14, 1.15, 1.16, 1.16, 1.17, 1.18, 1.18, 1.19, 1.19, 1.20 ];
@@ -104,8 +176,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 
 		$scope.snapshot = [];
 
-		delete $scope.alertSuccess; // Greenish
-		delete $scope.alertDanger;  // Reddish
+		$scope.defenderWins = false;
+		$scope.attackerWins = false;
 
 		// Get 0th defender's fortifications:
 		var wehranlagen = Number($scope.defWehranlagen[0]);
@@ -136,7 +208,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			
 			switch (offType) {
 			
-			case "Burg":
+			case "castle":
 
 				// Compute attacker's buffs for "castle" type.
 				buffOffInfanterie[j] = 1;
@@ -152,7 +224,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				if (offBibliothek >= 9) buffOffKavallerie[j] *= 1.05;
 				break;
 			
-			case "Festung":
+			case "fortress":
 
 				// Compute attacker's buffs for "fortress" type.
 				buffOffInfanterie[j] = 1.05 * 1.05;
@@ -162,11 +234,11 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				buffOffKavallerie[j] = 1.05 * 1.05;
 				break;
 				
-			case "Stadt":
+			case "city":
 
 				// Compute attacker's buffs for "city" type.
-				alert("Stadt NYI.");
-				throw new Error("Stadt NYI");
+				alert("City NYI.");
+				throw new Error("City NYI");
 			}
 		}
 		
@@ -182,7 +254,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			
 			switch (defType) {
 			
-			case "Burg":
+			case "castle":
 
 				// Compute defender's buffs for "castle" type.
 				buffDefInfanterie[j] = defFaktor[j];
@@ -201,7 +273,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				if (defBibliothek >= 10) buffDefKavallerie[j] *= 1.05;
 				break;
 				
-			case "Festung":
+			case "fortress":
 
 				// Compute defender's buffs for "fortress" type.
 				buffDefInfanterie[j] = defFaktor[j] * 1.05 * 1.05 * 1.05;
@@ -214,18 +286,18 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				if (defBibliothek >= 8) buffDefKavallerie[j] *= 1.05; // Plattenpanzerung
 				break;
 				
-			case "Stadt":
+			case "city":
 
 				// Compute defender's buffs for "city" type.
-				alert("Stadt NYI.");
-				throw new Error("Stadt NYI");
+				alert("City NYI.");
+				throw new Error("City NYI");
 			}
 		}
 
 		// Modify offenders' buffs for barracks.
 		for (var j = 0; j < $scope.snapshot0.off.length; j++) {
 		
-			if ($scope.offType[j] == "Festung") {
+			if ($scope.offType[j] == "fortress") {
 				buffOffInfanterie[j] *= $scope.BUFF_OFF_KASERNE[$scope.offKaserne[j] - 1];
 				buffOffArtillerie[j] *= $scope.BUFF_OFF_KASERNE[$scope.offKaserne[j] - 1];
 				buffOffKavallerie[j] *= $scope.BUFF_OFF_KASERNE[$scope.offKaserne[j] - 1];
@@ -300,7 +372,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				);
 			}
 
-			var f = numOffUnits <= 100 || numDefUnits <= 100 ? endkampf : kampf;
+			s.terminalFight = numOffUnits <= 100 || numDefUnits <= 100;
+			var f = s.terminalFight ? endkampf : kampf;
 			
 			// Combat - compute attackers' casualties.
 			s.off = [];
@@ -339,25 +412,28 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			if (i > 50) break; // Terminate iteration to prevent endless looping.
 
 			// Check who won after terminal battle.
-			if (f == endkampf) {
+			if (s.terminalFight) {
 
 				if (
 					s.offGegenInfanterie + s.offGegenArtillerie + s.offGegenKavallerie
 					<= s.defGegenInfanterie + s.defGegenArtillerie + s.defGegenKavallerie
 				) {
-					$scope.alertSuccess = "Verteidiger gewinnt"; // Greenish
+					$scope.defenderWins = true;
 				} else {
-					$scope.alertDanger  = "Angreifer gewinnt"; // Reddish
+					$scope.attackerWins = true;
 				}
 
 				break;
 			}
 		}
 	};
-	
+
+	$scope.langEn = function() { $scope.i18n = lbl.en; }
+	$scope.langDe = function() { $scope.i18n = lbl.de; }
+
 	$scope.defPlus = function() {
 	
-		$scope.defType.push("Burg");
+		$scope.defType.push("castle");
 		$scope.snapshot0.def.push({
 			speertraeger:            0,
 			schwertkaempfer:         0,
@@ -381,7 +457,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 	}
 	
 	$scope.offPlus = function() {
-		$scope.offType.push("Burg");
+		$scope.offType.push("castle");
 		$scope.snapshot0.off.push({
 			speertraeger:            0,
 			schwertkaempfer:         0,
