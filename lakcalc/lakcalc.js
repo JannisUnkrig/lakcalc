@@ -110,7 +110,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			footer:           "Want to report bugs, contribute, or just pat someone's back? Visit us on <a href=\"https://github.com/JannisUnkrig/lakcalc\" target=\"_top\">Github</a>.",
 		},
 		de: {
-			title:            "Lords and Knights-Kampfrechner",
+			title:            "Lords and Knights-<br />Kampfrechner",
 			arrivalTime:      "Ankunftszeit",
 			defender:         "Verteidiger",
 			supporter:        "Unterstützer",
