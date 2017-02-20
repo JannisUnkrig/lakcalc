@@ -421,10 +421,14 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			// Check who won after terminal battle.
 			if (isTerminalBattle) {
 
-				$scope.defenderWins = (
+				if (
 					s.offAgainstInfantry + s.offAgainstArtillery + s.offAgainstCavalry
 					<= s.defAgainstInfantry + s.defAgainstArtillery + s.defAgainstCavalry
-				);
+				) {
+					$scope.defenderWins = true;
+				} else {
+					$scope.attackerWins = true;
+				}
 
 				break;
 			}
