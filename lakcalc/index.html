@@ -169,9 +169,9 @@
 			<hr />
 			
 			<div class="btn-group" ng-init="limit_to = -1">
-				<label class="btn btn-xs btn-default active" ng-model="limit_to" uib-btn-radio="-1"  >Eventual units</label>
-				<label class="btn btn-xs btn-default"        ng-model="limit_to" uib-btn-radio="9998">All rounds</label>
-				<label class="btn btn-xs btn-default"        ng-model="limit_to" uib-btn-radio="9999">Full detail</label>
+				<label class="btn btn-xs btn-default active" ng-model="limit_to" uib-btn-radio="-1"  >{{ i18n.eventualUnits }}</label>
+				<label class="btn btn-xs btn-default"        ng-model="limit_to" uib-btn-radio="9998">{{ i18n.allRounds     }}</label>
+				<label class="btn btn-xs btn-default"        ng-model="limit_to" uib-btn-radio="9999">{{ i18n.fullDetails   }}</label>
 			</div>
 
 			<div ng-repeat="x in snapshot | limitTo : limit_to">
@@ -255,11 +255,11 @@
 			</div>
 
 			<div class="alert alert-success" ng-if="defenderWins">
-				{{ i18n.defenderWins }}
+				{{ i18n.defenderWins.replace('*', snapshot.length) }}
 			</div>
 
 			<div class="alert alert-danger" ng-if="attackerWins">
-				{{ i18n.attackerWins }}
+				{{ i18n.attackerWins.replace('*', snapshot.length) }}
 			</div>
 
 			<div class="small" style="margin-top: 10px; text-align: center;">
