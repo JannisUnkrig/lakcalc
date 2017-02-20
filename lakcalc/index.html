@@ -28,11 +28,12 @@
 		<div ng-app="myApp" ng-controller="myCtrl" style="max-width:400px;" class="container">
 
 			<div style="float:right; margin-top:10px" class="btn-group">
-				<button type="button" ng-click="langEn()" class="btn btn-sm btn-secondary" style="background-color: #eee"><img src="uk_flag.png" /></button>
-				<button type="button" ng-click="langDe()" class="btn btn-sm btn-secondary" style="background-color: #eee"><img src="de_flag.png" /></button>
+				<label class="btn btn-sm btn-default" ng-model="i18n" uib-btn-radio="lbl.en"><img src="uk_flag.png" /></label>
+				<label class="btn btn-sm btn-default" ng-model="i18n" uib-btn-radio="lbl.de"><img src="de_flag.png" /></label>
 			</div>
 
-			<div class="page-header"><h4><span ng-bind-html="i18n.title"></span></h4></div>
+			<h4><span ng-bind-html="i18n.title"></span></h4>
+
 			<div class="row"> 
     			<div class="col-xs-6">{{ i18n.arrivalTime }}:</div>
 				<div class="col-xs-6"><div uib-timepicker ng-model="snapshot0.uhrzeit" show-meridian="false"></div></div>
@@ -177,7 +178,7 @@
 			<div ng-repeat="x in snapshot | limitTo : limit_to">
 				<hr />
 				
-				<h4>{{ i18n.battleAt }} {{ x.uhrzeit.getHours() }}:{{ x.uhrzeit.getMinutes() }} <span ng-if="x.nachtmodus">({{ i18n.nightmode }})</span></h4>
+				<h4>{{ i18n.battleAt.replace('*', x.uhrzeit.getHours() + ':' + x.uhrzeit.getMinutes()) }} <span ng-if="x.nachtmodus">({{ i18n.nightmode }})</span></h4>
 
 				<table class="table table-striped" ng-if="limit_to == 9999">
 					<tr><th></th><th>{{ i18n.defensiveValues }}</th><th>{{ i18n.offensiveValues }}</th></tr>

@@ -74,7 +74,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 
 	$scope.snapshot = [];
 
-	var lbl = {
+	$scope.lbl = {
 		en: {
 			title:            "Lords and Knights Battle Calculator",
 			arrivalTime:      "Arrival time",
@@ -98,7 +98,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			library:          "Library",
 			barracks:         "Barracks",
 			fight:            "Fight",
-			battleAt:         "Battle at",
+			battleAt:         "Battle at *",
 			nightmode:        "Nightmode",
 			defensiveValues:  "Defensive values",
 			offensiveValues:  "Offensive values",
@@ -135,7 +135,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			library:          "Bibliothek",
 			barracks:         "Kaserne",
 			fight:            "Kämpfe",
-			battleAt:         "Kampf um",
+			battleAt:         "Kampf um *",
 			nightmode:        "Nachtmodus",
 			defensiveValues:  "Defensivwerte",
 			offensiveValues:  "Offensivwerte",
@@ -150,7 +150,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			footer:           "Du willst Bugs melden, zum Code beitragen oder einfach nur jemandem auf die Schulter klopfen? Besuch uns auf <a href=\"https://github.com/JannisUnkrig/lakcalc\" target=\"_top\">Github</a>.",
 		},
 	};
-	$scope.i18n = lbl.en;
+	$scope.i18n = $scope.lbl.en;
 
 	// Fighting functions:
 
@@ -378,8 +378,8 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 				);
 			}
 
-			s.terminalFight = numOffUnits <= 100 || numDefUnits <= 100;
-			var f = s.terminalFight ? endkampf : kampf;
+			var terminalBattle = numOffUnits <= 100 || numDefUnits <= 100;
+			var f = terminalBattle ? endkampf : kampf;
 			
 			// Combat - compute attackers' casualties.
 			s.off = [];
@@ -418,7 +418,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			if (i > 50) break; // Terminate iteration to prevent endless looping.
 
 			// Check who won after terminal battle.
-			if (s.terminalFight) {
+			if (terminalBattle) {
 
 				if (
 					s.offGegenInfanterie + s.offGegenArtillerie + s.offGegenKavallerie
@@ -433,9 +433,6 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			}
 		}
 	};
-
-	$scope.langEn = function() { $scope.i18n = lbl.en; }
-	$scope.langDe = function() { $scope.i18n = lbl.de; }
 
 	$scope.defPlus = function() {
 	
