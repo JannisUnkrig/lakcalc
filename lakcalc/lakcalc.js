@@ -97,7 +97,7 @@ angular.module('myApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller(
 			fortifications:   "Fortifications",
 			library:          "Library",
 			barracks:         "Barracks",
-			fight:            "Fight!",
+			fight:            "Fight",
 			battleAt:         "Battle at *",
 			nightmode:        "Nightmode",
 			defensiveValues:  "Defensive values",
