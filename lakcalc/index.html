@@ -166,13 +166,16 @@
 			</table>
 
 			<input type="submit" ng-click="fight()" value="{{ i18n.fight }}" />			
-		
-			<hr />
-			
-			<div class="btn-group" ng-init="limit_to = -1">
-				<label class="btn btn-xs btn-default active" ng-model="limit_to" uib-btn-radio="-1"  >{{ i18n.eventualUnits }}</label>
-				<label class="btn btn-xs btn-default"        ng-model="limit_to" uib-btn-radio="9998">{{ i18n.allRounds     }}</label>
-				<label class="btn btn-xs btn-default"        ng-model="limit_to" uib-btn-radio="9999">{{ i18n.fullDetails   }}</label>
+
+			<!-- For unknown reasons, 'ng-if' doesn't do the trick here!? -->
+			<div ng-init="limit_to = 9998" ng-hide="snapshot.length == 0">
+				<hr />
+				
+				<div class="btn-group">
+					<label class="btn btn-xs btn-default" ng-model="limit_to" uib-btn-radio="-1"  >{{ i18n.eventualUnits }}</label>
+					<label class="btn btn-xs btn-default" ng-model="limit_to" uib-btn-radio="9998">{{ i18n.allRounds     }}</label>
+					<label class="btn btn-xs btn-default" ng-model="limit_to" uib-btn-radio="9999">{{ i18n.fullDetails   }}</label>
+				</div>
 			</div>
 
 			<div ng-repeat="x in snapshot | limitTo : limit_to">
